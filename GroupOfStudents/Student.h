@@ -6,7 +6,6 @@ private:
     char* name;
     int* marks;
 	int marksCount; // edit size to marksCount to understand better
-
 public:
     Student();
     Student(const char* _name, int _marksCount);
@@ -16,17 +15,19 @@ public:
     char* getName();
     void setName(const char* _name);
 
-    int* getMarks();
-    void setMarks(const int* _marks, int _count);
-
     int getMarksCount();
-    void setMarksCount(int _newCount);
-
     int getMark(int _subjectIndex);
     void setMark(int _subjectIndex, int _value);
 
-    void Print();
     double getAverage();
+    void Print();
 
+    /* 
     
+    not needed methods and i don't add its due to difficul realization of it!!!
+    
+    int* getMarks();
+    void setMarks(const int*, int);   
+    void setMarksCount(int);
+    */ 
 };

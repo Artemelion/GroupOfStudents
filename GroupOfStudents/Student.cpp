@@ -2,189 +2,141 @@
 #include <iostream>
 using namespace std;
 
-Student::Student() : name(nullptr), marks(nullptr), size(0){}
-Student::Student(const char* _name, int* _marks, int _size)
+Student::Student():name(nullptr), marks(nullptr), marksCount(0) {}
+Student::Student(const char* _name, int _marksCount)
 {
-	if (_name != nullptr)
-	{
-		name = new char[strlen(_name) + 1];
-		strcpy_s(name, strlen(_name) + 1, _name);
-	}
-	else
-	{
-		name = nullptr;
-	}
+    if (_name != nullptr)
+    {
+        name = new char[strlen(_name) + 1];
+        strcpy_s(name, strlen(_name) + 1, _name);
+    }
+    else
+    {
+        name = nullptr;
+    }
 
-	if (_marks != nullptr && _size > 0)
-	{
-		size = _size;
-		marks = new int[size];
-		for (int i = 0; i < size; i++)
-		{
-			marks[i] = _marks[i];
-		}
-	}
-	else
-	{
-		size = 0;
-		marks = nullptr;
-	}
+    if (_marksCount > 0)
+    {
+        marks = new int[_marksCount];
+        for (int i = 0; i < _marksCount; i++)
+        {
+            marks[i] = 0;
+        }
+        marksCount = _marksCount;
+    }
+    else
+    {
+		cout << "We don't have marks count or/and _name" << endl;
+        marks = nullptr;
+        marksCount = 0;
+    }
+}
+Student::Student(const Student& _obj)
+{
+    if (_obj.name != nullptr)
+    {
+        name = new char[strlen(_obj.name) + 1];
+        strcpy_s(name, strlen(_obj.name) + 1, _obj.name);
+    }
+    else
+    {
+        name = nullptr;
+    }
+
+    if (_obj.marks != nullptr && _obj.marksCount > 0)
+    {
+        marks = new int[_obj.marksCount];
+        for (int i = 0; i < _obj.marksCount; i++)
+        {
+            marks[i] = _obj.marks[i];
+        }
+        marksCount = _obj.marksCount;
+    }
+    else
+    {
+        marks = nullptr;
+        marksCount = 0;
+    }
 }
 Student::~Student()
 {
-	delete[] name;
-	delete[] marks;
+    if (name != nullptr)
+    {
+        delete[] name;
+        name = nullptr;
+    }
+    if (marks != nullptr)
+    {
+        delete[] marks;
+        marks = nullptr;
+    }
+    marksCount = 0;
 }
 
-void Student::AddStudent(const char* _name, int* _marks, int _size)
-{
-	if (name != nullptr)
-	{
-		delete[] name;
-	}
-	if (_name != nullptr)
-	{
-		name = new char[strlen(_name) + 1];
-		strcpy_s(name, strlen(_name) + 1, _name);
-	}
-	else
-	{
-		name = nullptr;
-	}
+char* Student::getName() { return name; }
+int   Student::getMarksCount() { return marksCount; }
 
-	if (marks != nullptr)
-	{
-		delete[] marks;
-	}
-	if (_marks != nullptr && _size > 0)
-	{
-		size = _size;
-		marks = new int[size];
-		for (int i = 0; i < size; i++)
-		{
-			marks[i] = _marks[i];
-		}
-	}
-	else
-	{
-		size = 0;
-		marks = nullptr;
-	}
-}
-void Student::DeleteStudent()
+void Student::setName(const char* _name)
 {
-	if (name != nullptr)
-	{
-		delete[] name;
-		name = nullptr;
-	}
-	if (marks != nullptr)
-	{
-		delete[] marks;
-		marks = nullptr;
-		size = 0;
-	}
+    if (name != nullptr)
+    {
+        delete[] name;
+        name = nullptr;
+    }
+    if (_name != nullptr)
+    {
+        name = new char[strlen(_name) + 1];
+        strcpy_s(name, strlen(_name) + 1, _name);
+    }
+    else
+    {
+        name = nullptr;
+    }
+}
+int Student::getMark(int _subjectIndex)
+{
+    if (marks == nullptr) { return 0; }
+    if (_subjectIndex < 0) { return 0; }
+    if (_subjectIndex >= marksCount) { return 0; }
+    return marks[_subjectIndex];
+}
+void Student::setMark(int _subjectIndex, int _value)
+{
+    if (marks == nullptr) { return; }
+    if (_subjectIndex < 0) { return; }
+    if (_subjectIndex >= marksCount) { return; }
+    marks[_subjectIndex] = _value;
+}
+double Student::getAverage()
+{
+    if (marks == nullptr) { return 0.0; }
+    if (marksCount <= 0) { return 0.0; }
+    int sum = 0;
+    for (int i = 0; i < marksCount; i++)
+    {
+        sum += marks[i];
+    }
+    return (double)sum/(double)marksCount;
 }
 
 void Student::Print()
 {
-	if (name != nullptr)
-	{
-		cout << "Name: " << name << endl;
-	}
-	else
-	{
-		cout << "Name: nullptr" << endl;
-	}
+    cout << "Name: ";
+    if (name != nullptr) { cout << name << "\n"; }
+    else { cout << "No name\n"; }
 
-	if (marks != nullptr && size > 0)
-	{
-		cout << "Marks: ";
-		for (int i = 0; i < size; i++)
-		{
-			cout << marks[i] << " ";
-		}
-		cout << endl;
-	}
-	else
-	{
-		cout << "Marks: nullptr" << endl;
-	}
-}
-
-void Student::GetName()
-{
-	if (name != nullptr)
-	{
-		cout << "Name: " << name << endl;
-	}
-	else
-	{
-		cout << "Name: nullptr" << endl;
-	}
-}
-int Student::GetMark(int index)
-{
-	if (marks != nullptr && index >= 0 && index < size)
-	{
-		return marks[index];
-	}
-	else
-	{
-		cout << "Invalid index or marks is nullptr" << endl;
-		return -1;
-	}
-}
-int Student::GetSize()
-{
-	return size;
-}
-
-void Student::SetName(const char* _name)
-{
-	if (name != nullptr)
-	{
-		delete[] name;
-	}
-	if (_name != nullptr)
-	{
-		name = new char[strlen(_name) + 1];
-		strcpy_s(name, strlen(_name) + 1, _name);
-	}
-	else
-	{
-		name = nullptr;
-	}
-}
-void Student::SetMark(int index, int mark)
-{
-	if (marks != nullptr && index >= 0 && index < size)
-	{
-		marks[index] = mark;
-	}
-	else
-	{
-		cout << "Invalid index or marks is nullptr" << endl;
-	}
-}
-void Student::SetSize(int _size)
-{
-	if (marks != nullptr)
-	{
-		delete[] marks;
-	}
-	if (_size > 0)
-	{
-		size = _size;
-		marks = new int[size];
-		for (int i = 0; i < size; i++)
-		{
-			marks[i] = 0; // инициализируем нулями
-		}
-	}
-	else
-	{
-		size = 0;
-		marks = nullptr;
-	}
+    cout << "Marks: ";
+    if (marks != nullptr && marksCount > 0)
+    {
+        for (int i = 0; i < marksCount; i++)
+        {
+            cout << marks[i];
+            if (i < marksCount - 1) { cout << ' '; }
+        }
+        cout << "\n";
+    }
+    else
+    {
+        cout << "No marks\n";
+    }
 }
