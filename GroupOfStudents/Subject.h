@@ -1,16 +1,18 @@
 #pragma once
+
 class Subject
 {
-	char* name;
+private:
+    char* name;
+
 public:
-	Subject();
-	Subject(const char* _name);
-	~Subject();
+    Subject();
+    Subject(const char* _name);
+    Subject(const Subject& _obj);
+    ~Subject();
 
-	void GetSubject();
-	void SetSubject(const char* _name);
+    char* getName();
+    void setName(const char* _name);
 
-	void Print();
-
+    void Print();
 };
-
