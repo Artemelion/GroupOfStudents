@@ -1,33 +1,32 @@
 #pragma once
+
 class Student
 {
-	char* name;
-	int* marks;
-	int size;
+private:
+    char* name;
+    int* marks;
+	int marksCount; // edit size to marksCount to understand better
 
+public:
+    Student();
+    Student(const char* _name, int _marksCount);
+    Student(const Student& _obj);
+    ~Student();
 
-	int countSubjects;
-	int countOfMarks;
+    char* getName();
+    void setName(const char* _name);
 
-	Subject* SubjectList;
-	Student* MarkList;
+    int* getMarks();
+    void setMarks(const int* _marks, int _count);
 
-public: 
-	Student();
-	Student(const char* _name, int* _marks, int _size);
-	~Student();
+    int getMarksCount();
+    void setMarksCount(int _newCount);
 
-	void AddStudent(const char* _name, int* _marks, int _size);
-	void DeleteStudent();
-	void Print();
+    int getMark(int _subjectIndex);
+    void setMark(int _subjectIndex, int _value);
 
-	void GetName();
-	int GetMark(int index);
-	int GetSize();
+    void Print();
+    double getAverage();
 
-	void SetName(const char* _name);
-	void SetMark(int index, int mark);
-	void SetSize(int _size);
-
+    
 };
-
