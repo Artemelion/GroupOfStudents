@@ -74,7 +74,7 @@ Student::~Student()
 }
 
 char* Student::getName() { return name; }
-int   Student::getMarksCount() { return marksCount; }
+int Student::getMarksCount() { return marksCount; }
 
 void Student::setName(const char* _name)
 {
