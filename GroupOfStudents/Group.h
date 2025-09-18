@@ -1,43 +1,45 @@
+#pragma once
 #include "Student.h"
 #include "Subject.h"
 
-#pragma once
 class Group
 {
-	char* name;
-	Student* StudentsList;
-	int countStudents;
+private:
+    char* name;
 
-	Student** SubjectMarksList;
+    Student** students;
+    int studentsCount;
 
-// + в main ещё нужно создать двухмерный динамический
-// массив группы студентов + подвязать SubjectMarksList
+    Subject** subjects;
+    int subjectsCount;
+
 public:
-	Group();
-	Group(const char* _name, Student* _StudentsList, int _countStudents, Subject* _subjectList, int _countSubjects);
-	~Group();
-	Student* GetMarkList();
-	Student* SetMarkList(int* marks, int size);
-	/*Student* AddMarkList(int* marks, int size);
-	Student* DeleteMarkList();
-	Student* EditMarkList(int index, int mark);*/
-	Student* PrintMarkList();
-	Student* AverageMarkList();
-	Student* MaxMarkList();
-	Student* MinMarkList();
-	
-	void PrintAll();	
+    Group();
+    Group(const char* _name);
+    Group(const Group& _obj);
+    ~Group();
 
-	void GetName();
-	Student GetStudent(int index);
-	int GetCountStudents();
-	Subject GetSubject(int index);
-	int GetCountSubjects();
+    void AddStudent(Student* _ptr);
+    void AddSubject(Subject* _ptr);
 
-	void SetName(const char* _name);
-	void SetStudent(int index, Student student);
-	void SetCountStudents(int _countStudents);
-	void SetSubject(int index, Subject subject);
-	void SetCountSubjects(int _countSubjects);
+    char* getName();
+    void setName(const char* _name);
+
+    int getStudentsCount();
+    int getSubjectsCount();
+
+    Student* GetStudent(int _index);
+    Subject* GetSubject(int _index);
+
+    void SetMark(int _studentIndex, int _subjectIndex, int _value);
+    int  GetMark(int _studentIndex, int _subjectIndex);
+
+    void PrintMarksTable();
+    double GetStudentAverage(int _studentIndex);
+    double GetSubjectAverage(int _subjectIndex);
+    double GetGroupAverage();
+
+
+    void PrintAverages();
+    void PrintMinMaxBySubject();
 };
-
