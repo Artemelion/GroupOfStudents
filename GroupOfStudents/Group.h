@@ -32,7 +32,7 @@ public:
     Subject* GetSubject(int _index);
 
     void SetMark(int _studentIndex, int _subjectIndex, int _value);
-    int  GetMark(int _studentIndex, int _subjectIndex);
+    int GetMark(int _studentIndex, int _subjectIndex);
 
     void PrintMarksTable();
     double GetStudentAverage(int _studentIndex);
