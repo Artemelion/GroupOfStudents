@@ -3,7 +3,6 @@
 using namespace std;
 
 Group::Group() :name(nullptr), students(nullptr), studentsCount(0), subjects(nullptr), subjectsCount(0) {}
-
 Group::Group(const char* _name) :name(nullptr), students(nullptr), studentsCount(0), subjects(nullptr), subjectsCount(0)
 {
     if (_name != nullptr)
@@ -12,7 +11,6 @@ Group::Group(const char* _name) :name(nullptr), students(nullptr), studentsCount
         strcpy_s(name, strlen(_name) + 1, _name);
     }
 }
-
 Group::Group(const Group& _obj) :name(nullptr), students(nullptr), studentsCount(0), subjects(nullptr), subjectsCount(0)
 {
     if (_obj.name != nullptr)
@@ -55,7 +53,6 @@ Group::Group(const Group& _obj) :name(nullptr), students(nullptr), studentsCount
         }
     }
 }
-
 Group::~Group()
 {
     if (name != nullptr)
@@ -114,7 +111,6 @@ void Group::AddStudent(Student* _ptr)
     students = newArray;
     studentsCount = studentsCount + 1;
 }
-
 void Group::AddSubject(Subject* _ptr)
 {
     if (_ptr == nullptr)
@@ -139,7 +135,6 @@ char* Group::getName()
 {
     return name;
 }
-
 void Group::setName(const char* _name)
 {
     if (name != nullptr)
@@ -158,7 +153,6 @@ int Group::getStudentsCount()
 {
     return studentsCount;
 }
-
 int Group::getSubjectsCount()
 {
     return subjectsCount;
@@ -172,7 +166,6 @@ Student* Group::GetStudent(int _index)
     }
     return students[_index];
 }
-
 Subject* Group::GetSubject(int _index)
 {
     if (_index < 0 || _index >= subjectsCount || subjects == nullptr)
@@ -181,7 +174,6 @@ Subject* Group::GetSubject(int _index)
     }
     return subjects[_index];
 }
-
 void Group::SetMark(int _studentIndex, int _subjectIndex, int _value)
 {
     if (_studentIndex < 0 || _studentIndex >= studentsCount)
@@ -198,7 +190,6 @@ void Group::SetMark(int _studentIndex, int _subjectIndex, int _value)
     }
     (*students[_studentIndex]).setMark(_subjectIndex, _value);
 }
-
 int Group::GetMark(int _studentIndex, int _subjectIndex)
 {
     if (_studentIndex < 0 || _studentIndex >= studentsCount)
@@ -269,7 +260,6 @@ double Group::GetStudentAverage(int _studentIndex)
 
     return (double)sum / (double)countInAverage;
 }
-
 double Group::GetSubjectAverage(int _subjectIndex)
 {
     if (_subjectIndex < 0 || _subjectIndex >= subjectsCount) { return 0.0; }
@@ -290,7 +280,6 @@ double Group::GetSubjectAverage(int _subjectIndex)
     if (countInAverage == 0) { return 0.0; }
     return (double)sum / (double)countInAverage;
 }
-
 double Group::GetGroupAverage()
 {
     if (subjectsCount <= 0 || studentsCount <= 0) { return 0.0; }
@@ -314,6 +303,7 @@ double Group::GetGroupAverage()
     if (countInAverage == 0) { return 0.0; }
     return (double)sum / (double)countInAverage;
 }
+
 
 void Group::PrintAverages()
 {
@@ -347,7 +337,6 @@ void Group::PrintAverages()
 
     cout << "Group average: " << GetGroupAverage() << "\n";
 }
-
 void Group::PrintMinMaxBySubject()
 {
     for (int subjectIndex = 0; subjectIndex < subjectsCount; subjectIndex++)
